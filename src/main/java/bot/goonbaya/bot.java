@@ -1,5 +1,7 @@
 package bot.goonbaya
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 import java.util.*;
 
 public class bot{
@@ -81,6 +83,14 @@ class Doppelganger extends Role{
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick a player to copy");
+        int holder = nextInt();
+        if (players[holder].getRole().getName().equals("Insomniac")){
+            //figure out insomniac shit here
+        }
+        else if (players[holder].getRole().getName().equals("Werewolf")) {
+            this.were = true;
+        }
+        players[holder].getRole().doAction(player, players, unused);
     }
 }
 
@@ -93,7 +103,7 @@ class Werewolf extends Role{
     public void doAction(Player player, Player[] players, Role[] unused){
         boolean oneWolf = true;
         for (int i = 0; i < players.length(); i++) {
-            if(players[i].getRole().getWere && players[i].getUser() != player.getUser()){
+            if(players[i].getRole().getWere() && players[i].getUser() != player.getUser()){
                 System.out.println(players[i].getUser() + " is a Werewolf");
                 oneWolf = false;
             }
@@ -109,12 +119,12 @@ class Werewolf extends Role{
 class Minion extends Role{
     public Minion(){
         name = "Minion";
-        were = true;
+        were = false;
         order = 3;
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         for (int i = 0; i < players.length(); i++) {
-            if(players[i].getRole().getName() == "Werewolf"){
+            if(players[i].getRole().getName().equals("Werewolf")){
                 System.out.println(players[i].getUser() + " is a Werewolf");
             }
         }
@@ -130,7 +140,7 @@ class Mason extends Role{
     public void doAction(Player player, Player[] players, Role[] unused){
         boolean oneMason = true;
         for (int i = 0; i < players.length(); i++) {
-            if(players[i].getRole().getName() == "Mason" && players[i].getUser() != player.getUser()){
+            if(players[i].getRole().getName().equals("Mason") && players[i].getUser() != player.getUser()){
                 System.out.println(players[i].getUser() + " is a Mason");
                 oneWolf = false;
             }
