@@ -4,22 +4,75 @@ import java.util.*;
 
 public class bot{
     public static void main(String[] args) {
-
+        Game test = new Game(5);
     }
 }
 
-class game{
-    Player[] players;
-    Player[] playerOrder;
-    Role[] roles;
-    Role[] unused;
-    public game(int nplay){
+class Game{
+    Scanner sc = new Scanner(System.in);
+    private Player[] players;
+    private Player[] playerOrder;
+    private Role[] roles;
+    private Role[] unused = new Role[3];
+    public Game(int nplay){
         players = new Player[nplay];
+        roles = new Role[nplay + 3];
+        createRoles();
+        shuffleRoles();
+        setRoles();
+        setOrder();
     }
+    private void createRoles(){
+        System.out.println("Which rolls would you like?");
+        System.out.println("1.Doppelganger\n2.Werewolf\n3.Werewolf\n4.Minion\n5.Mason\n6.Mason\n7.Seer\n8.Robber\n9.Troublemaker\n10.Drunk\n11.Insomniac\n12.Villager\n13.Villager\n14.Villager\n15.Hunter\n16.Tanner");
+        String input = sc.nextLine();
+        String[] inputArray = input.split(", ");
+        for (int i = 0; i < inputArray.length; i++){
+            System.out.println(inputArray[i]);
+            switch(Integer.parseInt(inputArray[i])){
+                case 1: roles[i] = new Doppelganger();
+                case 2: roles[i] = new Werewolf();
+                case 3: roles[i] = new Werewolf();
+                case 4: roles[i] = new Minion();
+                case 5: roles[i] = new Mason();
+                case 6: roles[i] = new Mason();
+                case 7: roles[i] = new Seer();
+                case 8: roles[i] = new Robber();
+                case 9: roles[i] = new Troublemaker();
+                case 10: roles[i] = new Drunk();
+                case 11: roles[i] = new Insomniac();
+                case 12: roles[i] = new Villager();
+                case 13: roles[i] = new Villager();
+                case 14: roles[i] = new Villager();
+                case 15: roles[i] = new Hunter();
+                case 16: roles[i] = new Tanner();
+            }
+        }
 
-    public void setOrder(){
+    }
+    private void setOrder(){
         Arrays.sort(playerOrder);
     }
+    private void shuffleRoles()    {
+        int index;
+        Role temp;
+        Random random = new Random();
+        for (int i = roles.length - 1; i > 0; i--)
+        {
+            index = random.nextInt(i + 1);
+            temp = roles[index];
+            roles[index] = roles[i];
+            roles[i] = temp;
+        }
+    }
+    private void setRoles(){
+        for (int i = 0; i < players.length; i++)
+            players[i] = new Player(roles[i]);
+        unused[0] = roles[players.length];
+        unused[1] = roles[players.length + 1];
+        unused[2] = roles[players.length + 2];
+    }
+
 }
 
 
