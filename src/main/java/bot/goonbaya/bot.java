@@ -1,7 +1,5 @@
 package bot.goonbaya
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 import java.util.*;
 
 public class bot{
@@ -12,6 +10,7 @@ public class bot{
 
 class game{
     Player[] players;
+    Player[] playerOrder;
     Role[] roles;
     Role[] unused;
     public game(int nplay){
@@ -19,14 +18,12 @@ class game{
     }
 
     public void setOrder(){
-        for (int i = 0; i < players; i++) {
-
-        }
+        Arrays.sort(playerOrder);
     }
 }
 
 
-class Player{
+class Player implements Comparable<Player>{
     private String initRole;
     private Role currentRole;
     private String username;
@@ -52,6 +49,11 @@ class Player{
         return username;
     }
 
+    public int compareTo(Player comp){
+        return (new Integer(this.getRole().getOrder())).compareTo(comp.getRole().getOrder());
+    }
+
+
 }
 
 class Role{
@@ -62,7 +64,7 @@ class Role{
     public Role(){
         were = false;
     }
-    public void doAction(Player player, Player[] players, Role[] unused);
+    public void doAction(Player player, Player[] players, Role[] unused){}
     public boolean getWere(){
         return were;
     }
@@ -84,10 +86,12 @@ class Doppelganger extends Role{
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick a player to copy");
         int holder = nextInt();
+        System.out.println("You are now a" + players[holder].getRole().getName());
         if (players[holder].getRole().getName().equals("Insomniac")){
             //figure out insomniac shit here
+            return;
         }
-        else if (players[holder].getRole().getName().equals("Werewolf")) {
+        else if (players[holder].getRole().getWere()){
             this.were = true;
         }
         players[holder].getRole().doAction(player, players, unused);
@@ -95,8 +99,8 @@ class Doppelganger extends Role{
 }
 
 class Werewolf extends Role{
-    name = "Werewolf";
     public Werewolf(){
+        name = "Werewolf";
         were = true;
         order = 2;
     }
@@ -196,7 +200,15 @@ class Troublemaker extends Role{
         were = false;
         order = 7;
     }
-    public void doAction(Player player, Player[] players, Role[] unused);
+    public void doAction(Player player, Player[] players, Role[] unused){
+        System.out.println("Pick two players to switch");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        Role temp = players[a].getRole();
+        players[a].setRole(players[b].getRole());
+        players[b].setRole(temp);
+        System.out.println("You switched" + players[a].getUser() + " and " + players[b].getUser());
+    }
 }
 
 class Drunk extends Role{
