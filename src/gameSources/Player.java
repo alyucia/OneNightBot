@@ -1,12 +1,32 @@
 package gameSources;
 
+import lombok.Getter;
+import lombok.Setter;
+import net.dv8tion.jda.core.entities.User;
+
 public class Player implements Comparable<Player>{
+
+    @Getter
+    @Setter
     private String initRole;
+
+    @Getter
+    @Setter
     private Role currentRole;
+
+    @Getter
+    private User user;
+
+    @Getter
     private String username;
 
-    public Player(String name){
-        username = name;
+    public Player(User user){
+        this.user = user;
+    }
+
+    //must deprecate later
+    public Player(String username) {
+        this.username = username;
     }
 
     public void setRole(Role newRole){
@@ -26,11 +46,12 @@ public class Player implements Comparable<Player>{
         return initRole;
     }
 
-    public String getUser(){
-        return username;
+    public String getUsername() {
+        return user.toString();
     }
 
     public int compareTo(Player comp){
         return (new Integer(this.getRole().getOrder())).compareTo(comp.getRole().getOrder());
     }
+
 }

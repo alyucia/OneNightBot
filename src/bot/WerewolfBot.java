@@ -1,3 +1,5 @@
+package bot;
+
 import gameSources.GameRunner;
 import lombok.Getter;
 import net.dv8tion.jda.core.AccountType;
