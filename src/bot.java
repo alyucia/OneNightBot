@@ -5,6 +5,8 @@ import java.util.*;
 public class bot{
     public static void main(String[] args) {
         Game test = new Game(5);
+        test.optIn();
+        test.startGame();
     }
 }
 
@@ -20,32 +22,59 @@ class Game{
         roles = new Role[nplay + 3];
         createRoles();
         shuffleRoles();
+    }
+    public void optIn(){
+        String name;
+        for (int i = 0; i < players.length; i++){
+            System.out.println("Please enter your name");
+            name = sc.nextLine();
+            players[i] = new Player(name);
+        }
+    }
+    public void startGame(){
         setRoles();
         setOrder();
+        nightActions();
     }
     private void createRoles(){
-        System.out.println("Which rolls would you like?");
+        System.out.println("Which roles would you like?");
         System.out.println("1.Doppelganger\n2.Werewolf\n3.Werewolf\n4.Minion\n5.Mason\n6.Mason\n7.Seer\n8.Robber\n9.Troublemaker\n10.Drunk\n11.Insomniac\n12.Villager\n13.Villager\n14.Villager\n15.Hunter\n16.Tanner");
         String input = sc.nextLine();
         String[] inputArray = input.split(", ");
         for (int i = 0; i < inputArray.length; i++){
             switch(Integer.parseInt(inputArray[i])){
                 case 1: roles[i] = new Doppelganger();
+                        break;
                 case 2: roles[i] = new Werewolf();
+                        break;
                 case 3: roles[i] = new Werewolf();
+                        break;
                 case 4: roles[i] = new Minion();
+                        break;
                 case 5: roles[i] = new Mason();
+                        break;
                 case 6: roles[i] = new Mason();
+                        break;
                 case 7: roles[i] = new Seer();
+                        break;
                 case 8: roles[i] = new Robber();
+                        break;
                 case 9: roles[i] = new Troublemaker();
+                        break;
                 case 10: roles[i] = new Drunk();
+                        break;
                 case 11: roles[i] = new Insomniac();
+                        break;
                 case 12: roles[i] = new Villager();
+                        break;
                 case 13: roles[i] = new Villager();
+                        break;
                 case 14: roles[i] = new Villager();
+                        break;
                 case 15: roles[i] = new Hunter();
+                        break;
                 case 16: roles[i] = new Tanner();
+                        break;
             }
         }
 
@@ -68,12 +97,27 @@ class Game{
         }
     }
     private void setRoles(){
-        for (int i = 0; i < players.length; i++)
-            players[i] = new Player(roles[i]);
+        System.out.println("Setting roles!");
+        for (int i = 0; i < players.length; i++) {
+            players[i].setInitRole(roles[i]);
+            System.out.println(roles[i].getName());
+        }
         unused[0] = roles[players.length];
         unused[1] = roles[players.length + 1];
         unused[2] = roles[players.length + 2];
     }
+
+    private void nightActions() {
+        System.out.println("Starting night actions!");
+        for (int i = 0; i < players.length; i++) {
+            playerOrder[i].getRole().doAction(playerOrder[i], players, unused);
+            //System.out.println(playerOrder[i].getUser());
+            //System.out.println(playerOrder[i].getRole().getName());
+        }
+        if (playerOrder[0].getRole().doppelInsomniac)
+            System.out.println("You are " + playerOrder[0].getRole().getName());
+    }
+
 
 }
 
@@ -83,14 +127,18 @@ class Player implements Comparable<Player>{
     private Role currentRole;
     private String username;
 
-    public Player(Role init){
-        currentRole = init;
-        initRole = init.getName();
+    public Player(String name){
+        username = name;
     }
 
     public void setRole(Role newRole){
         currentRole = newRole;
     }
+    public void setInitRole(Role init){
+        currentRole = init;
+        initRole = init.getName();
+    }
+
 
     public Role getRole(){
         return currentRole;
@@ -112,6 +160,7 @@ class Player implements Comparable<Player>{
 }
 
 class Role{
+    public boolean doppelInsomniac;
     Scanner sc = new Scanner(System.in);
     private boolean were;
     private int order;
@@ -141,13 +190,14 @@ class Role{
 class Doppelganger extends Role{
     public Doppelganger(){
         super("Doppelganger", false, 1);
+        doppelInsomniac = false;
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick a player to copy");
         int holder = sc.nextInt();
         System.out.println("You are now a" + players[holder].getRole().getName());
         if (players[holder].getRole().getName().equals("Insomniac")){
-            //figure out insomniac shit here
+            doppelInsomniac = true;
             return;
         }
         else if (players[holder].getRole().getWere()){
@@ -170,7 +220,7 @@ class Werewolf extends Role{
             }
         }
         if (oneWolf){
-            System.out.println("Choose one card from the middle.");
+            System.out.println("No other werewolves!\nChoose one card from the middle.");
             int holder = sc.nextInt();
             System.out.println("That card is " + unused[holder].getName());
         }
