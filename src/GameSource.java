@@ -1,7 +1,7 @@
 import java.util.*;
 
-public class bot{
-    public static void main(String[] args) {
+public class GameSource{
+    public GameSource() {
         Game test = new Game(5);
         test.optIn();
         test.startGame();
