@@ -1,5 +1,6 @@
 package gameSources;
 
+import gameSources.roles.Role;
 import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.core.entities.User;

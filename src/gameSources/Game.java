@@ -1,5 +1,7 @@
 package gameSources;
 
+import gameSources.roles.*;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -32,7 +34,7 @@ public class Game{
     }
     private void createRoles(){
         System.out.println("Which roles would you like?");
-        System.out.println("1.gameSources.Doppelganger\n2.gameSources.Werewolf\n3.gameSources.Werewolf\n4.gameSources.Minion\n5.gameSources.Mason\n6.gameSources.Mason\n7.gameSources.Seer\n8.gameSources.Robber\n9.gameSources.Troublemaker\n10.gameSources.Drunk\n11.gameSources.Insomniac\n12.gameSources.Villager\n13.gameSources.Villager\n14.gameSources.Villager\n15.gameSources.Hunter\n16.gameSources.Tanner");
+        System.out.println("1.gameSources.roles.Doppelganger\n2.gameSources.roles.Werewolf\n3.gameSources.roles.Werewolf\n4.gameSources.roles.Minion\n5.gameSources.roles.Mason\n6.gameSources.roles.Mason\n7.gameSources.roles.Seer\n8.gameSources.roles.Robber\n9.gameSources.roles.Troublemaker\n10.gameSources.roles.Drunk\n11.gameSources.roles.Insomniac\n12.gameSources.roles.Villager\n13.gameSources.roles.Villager\n14.gameSources.roles.Villager\n15.gameSources.roles.Hunter\n16.gameSources.roles.Tanner");
         String input = sc.nextLine();
         String[] inputArray = input.split(", ");
         for (int i = 0; i < inputArray.length; i++){

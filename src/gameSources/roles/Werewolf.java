@@ -1,14 +1,16 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Werewolf extends Role{
     public Werewolf(){
-        super("gameSources.Werewolf", true, 2);
+        super("gameSources.roles.Werewolf", true, 2);
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         boolean oneWolf = true;
         for (int i = 0; i < players.length; i++) {
             if(players[i].getRole().getWere() && players[i].getUser() != player.getUser()){
-                System.out.println(players[i].getUser() + " is a gameSources.Werewolf");
+                System.out.println(players[i].getUser() + " is a gameSources.roles.Werewolf");
                 oneWolf = false;
             }
         }

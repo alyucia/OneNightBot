@@ -1,8 +1,10 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Seer extends Role{
     public Seer(){
-        super("gameSources.Seer", false, 5);
+        super("gameSources.roles.Seer", false, 5);
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Choose a player, or middle cards");

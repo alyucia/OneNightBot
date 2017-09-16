@@ -1,8 +1,10 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Drunk extends Role{
     public Drunk(){
-        super("gameSources.Drunk", false, 8);
+        super("gameSources.roles.Drunk", false, 8);
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick an unused role to switch with.");

@@ -1,8 +1,10 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Robber extends Role{
     public Robber(){
-        super("gameSources.Robber", false, 6);
+        super("gameSources.roles.Robber", false, 6);
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick a user to switch with.");

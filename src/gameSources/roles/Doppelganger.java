@@ -1,15 +1,17 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Doppelganger extends Role{
     public Doppelganger(){
-        super("gameSources.Doppelganger", false, 1);
+        super("gameSources.roles.Doppelganger", false, 1);
         doppelInsomniac = false;
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick a player to copy");
         int holder = sc.nextInt();
         System.out.println("You are now a" + players[holder].getRole().getName());
-        if (players[holder].getRole().getName().equals("gameSources.Insomniac")){
+        if (players[holder].getRole().getName().equals("gameSources.roles.Insomniac")){
             doppelInsomniac = true;
             return;
         }

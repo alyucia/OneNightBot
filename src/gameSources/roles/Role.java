@@ -1,5 +1,7 @@
-package gameSources;
+package gameSources.roles;
 
+
+import gameSources.Player;
 
 import java.util.Scanner;
 

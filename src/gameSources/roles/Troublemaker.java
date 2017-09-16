@@ -1,8 +1,10 @@
-package gameSources;
+package gameSources.roles;
+
+import gameSources.Player;
 
 public class Troublemaker extends Role{
     public Troublemaker(){
-        super("gameSources.Troublemaker", false, 7);
+        super("gameSources.roles.Troublemaker", false, 7);
     }
     public void doAction(Player player, Player[] players, Role[] unused){
         System.out.println("Pick two players to switch");
