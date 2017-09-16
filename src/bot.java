@@ -1,5 +1,3 @@
-package bot.goonbaya;
-
 import java.util.*;
 
 public class bot{
