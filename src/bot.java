@@ -14,6 +14,7 @@ class Game{
     private Role[] unused = new Role[3];
     public Game(int nplay){
         players = new Player[nplay];
+        playerOrder = new Player[nplay];
         roles = new Role[nplay + 3];
         createRoles();
         shuffleRoles();
@@ -26,7 +27,6 @@ class Game{
         String input = sc.nextLine();
         String[] inputArray = input.split(", ");
         for (int i = 0; i < inputArray.length; i++){
-            System.out.println(inputArray[i]);
             switch(Integer.parseInt(inputArray[i])){
                 case 1: roles[i] = new Doppelganger();
                 case 2: roles[i] = new Werewolf();
@@ -49,9 +49,11 @@ class Game{
 
     }
     private void setOrder(){
+        for (int i = 0; i < players.length; i++)
+            playerOrder[i] = players[i];
         Arrays.sort(playerOrder);
     }
-    private void shuffleRoles()    {
+    private void shuffleRoles(){
         int index;
         Role temp;
         Random random = new Random();
