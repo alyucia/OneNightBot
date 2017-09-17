@@ -12,6 +12,10 @@ public class GameRunner{
     public static final String HELP_STRING = "run game with \"!setup, [numPlayers]\"";
     public static final int MAX_PLAYERS = 13;
 
+    /**
+     * The GameListener should pass commands to the GameRunner for the gameRunner to figure out how to deal with it.
+     * @param event
+     */
     public void handleCommand(MessageReceivedEvent event) {
 
         String msg = event.getMessage().getStrippedContent();
@@ -37,6 +41,12 @@ public class GameRunner{
             }
         }
     }
+
+    /**
+     * Runs the game. by passing the MessageChannel that called !startGame, we know where to output general messages.
+     * @param numPlayers
+     * @param channel
+     */
     public void run(int numPlayers, MessageChannel channel) {
         Game test = new Game(numPlayers, channel);
         test.optIn();

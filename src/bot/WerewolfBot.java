@@ -11,6 +11,7 @@ import javax.security.auth.login.LoginException;
 
 public class WerewolfBot {
 
+    //replace with your own token
     private static final String BOT_TOKEN =
         "MzU4MzY4ODg0NDI1ODgzNjUw.DJ3fug.n9RQu6T6-pA5EYSUKQa017OmQHU";
 
