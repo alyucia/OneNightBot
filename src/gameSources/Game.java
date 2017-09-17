@@ -1,6 +1,7 @@
 package gameSources;
 
 import gameSources.roles.*;
+import net.dv8tion.jda.core.entities.MessageChannel;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -12,7 +13,10 @@ public class Game{
     private Player[] playerOrder;
     private Role[] roles;
     private Role[] unused = new Role[3];
-    public Game(int nplay){
+    private MessageChannel mainChannel;
+
+    public Game(int nplay, MessageChannel channel){
+        this.mainChannel = channel;
         players = new Player[nplay];
         playerOrder = new Player[nplay];
         roles = new Role[nplay + 3];

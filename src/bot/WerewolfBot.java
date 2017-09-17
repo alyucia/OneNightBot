@@ -17,13 +17,10 @@ public class WerewolfBot {
     @Getter
     private static JDA jda;
 
-    @Getter
-    private static GameRunner game;
-
     public static void main(String[] args)
         throws LoginException, RateLimitedException, InterruptedException
     {
         jda = new JDABuilder(AccountType.BOT).setToken(BOT_TOKEN).buildAsync();
-        game = new GameRunner(jda);
+        jda.addEventListener(new GameListener());
     }
 }
